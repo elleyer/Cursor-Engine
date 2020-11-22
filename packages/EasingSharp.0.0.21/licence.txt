@@ -1,9 +1,0 @@
-EasingSharp v0.1.0
-
-Copyright (c) 2020 FurenjiCH
- 
-Released under the MIT license.
-see https://opensource.org/licenses/MIT
- 
-The inherits function is:
-MIT license | https://github.com/furenjich/EasingSharp/blob/main/LICENSE
