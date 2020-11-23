@@ -1,22 +1,11 @@
 ﻿using System;
-using EasingSharp;
-using WinApi;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Gma.System.MouseKeyHook;
-using WinApi.User32;
-using WinApi.Windows;
 
 namespace CurEditor
 {
