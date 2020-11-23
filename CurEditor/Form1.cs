@@ -1,63 +1,55 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using CurEditor.Core;
+using CurEditor.Core.Cursor;
+using CurEditor.IO;
 using Gma.System.MouseKeyHook;
 
 namespace CurEditor
 {
     public sealed partial class Form1 : Form
     {
-        private IKeyboardMouseEvents _globalHook;
-
         private Point _lastClickPoint;
 
         private Size _startSize;
 
-        private bool _isLeftHeld;
-        
+        private CursorHandler _cursorHandler;
+
         public Form1()
         {
             InitializeComponent();
 
             _startSize = Cursor.Size;
 
-            Subscribe();
-        }
-
-        private void Subscribe()
-        {
-            _globalHook = Hook.GlobalEvents();
-
-            _globalHook.MouseDownExt += ResizeOnDown;
-            _globalHook.MouseUpExt += ResizeOnUp;;
-            _globalHook.MouseClick += OnClick;
-        }
-        
-        private void OnClick(object sender, MouseEventArgs e)
-        {
-            _isLeftHeld = true;
+            if (!SettingsContainer.SaveExists) return;
             
-            _lastClickPoint = e.Location;
+            var settings = SettingsContainer.Get();
+            Init(settings);
         }
 
-        private void ResizeOnDown(object sender, MouseEventExtArgs e)
+        private void Init(Settings settings)
         {
-            SetSystemCursorsScale(0.7f);
-            var thread = new Thread(ResizeDown);
-            thread.Start();
-        }
+            UseScaling.Checked = settings.UseScaling;
+            UseScalingInterpolation.Checked = settings.UseScalingInterpolation;
+            UseRotation.Checked = settings.UseRotation;
 
-        private void ResizeOnUp(object sender, MouseEventExtArgs e)
-        {
-            _isLeftHeld = false;
-            SetSystemCursorsScale(1.0f);
+            MinScaleSlider.Value = settings.MinCursorScale;
+            RotationSlider.Value = settings.RotationAngle;
+            InterpolationSlider.Value = settings.InterpolationSpeed;
             
-            var thread = new Thread(ResizeUp);
-            thread.Start();
+            var inButtons = InterpolationIn.Controls.OfType<RadioButton>().ToArray();
+            inButtons[(int)settings.EasingIn].Checked = true;
+            
+            var outButtons = InterpolationOut.Controls.OfType<RadioButton>().ToArray();
+            outButtons[(int)settings.EasingOut].Checked = true;
+            
+            _cursorHandler = new CursorHandler(settings);
         }
 
         private void ResizeDown()
@@ -77,146 +69,50 @@ namespace CurEditor
             }*/
         }
 
-        private void Rotate()
+        private void SaveAllOnClick(object sender, EventArgs e)
         {
-            while (_isLeftHeld)
+            var inButtons = InterpolationIn.Controls.OfType<RadioButton>().ToArray();
+            var inIndex = Array.IndexOf(inButtons, inButtons.Single(x => x.Checked));
+            
+            var outButtons = InterpolationOut.Controls.OfType<RadioButton>().ToArray();
+            var outIndex = Array.IndexOf(outButtons, outButtons.Single(x => x.Checked));
+            
+            SettingsContainer.Update(UseScaling.Checked, UseScalingInterpolation.Checked, 
+                UseRotation.Checked, MinScaleSlider.Value, InterpolationSlider.Value, 
+                RotationSlider.Value, (EasingType)inIndex, (EasingType)outIndex);
+
+            var settings = SettingsContainer.Get();
+            
+            if (_cursorHandler == null)
+                _cursorHandler = new CursorHandler(settings);
+            else
+                _cursorHandler.UpdateSettings(SettingsContainer.Get());
+        }
+
+        private void SelectFolderOnClick(object sender, EventArgs e)
+        {
+            using (var dialog = new FolderBrowserDialog())
             {
+                dialog.ShowDialog();
                 
+                using (var fm = new FileManager())
+                {
+                    var containers = fm.GetContainers(dialog.SelectedPath);
+                    var count = containers.Count;
+
+                    for (var i = 0; i < count; i++)
+                    {
+                        CursorTreeView.Nodes.Add(containers[i].GetName());
+
+                        var files = containers[i].GetFiles();
+
+                        foreach (var file in files)
+                        {
+                            CursorTreeView.Nodes[i].Nodes.Add(file);   
+                        }
+                    }
+                }
             }
-        }
-
-        [DllImport("user32.dll")]
-        private static extern bool SetSystemCursor(IntPtr hcur, uint id);
-
-        [DllImport("user32.dll")]
-        private static extern bool DestroyIcon(IntPtr hIcon);
-
-        enum CursorShift
-        {
-            Centered,
-            LowerRight,
-        }
-
-        private void SetSystemCursorsScale(float deltaScale)
-        {
-            ResizeCursor(Cursors.AppStarting, deltaScale, CursorShift.LowerRight);
-            ResizeCursor(Cursors.Arrow, deltaScale, CursorShift.LowerRight);
-            ResizeCursor(Cursors.Cross, deltaScale, CursorShift.Centered);
-            ResizeCursor(Cursors.Hand, deltaScale, CursorShift.LowerRight);
-            ResizeCursor(Cursors.Help, deltaScale, CursorShift.LowerRight);
-            ResizeCursor(Cursors.HSplit, deltaScale, CursorShift.Centered);
-            ResizeCursor(Cursors.IBeam, deltaScale, CursorShift.Centered);
-            ResizeCursor(Cursors.No, deltaScale, CursorShift.LowerRight);
-            ResizeCursor(Cursors.NoMove2D, deltaScale, CursorShift.LowerRight);
-            ResizeCursor(Cursors.NoMoveHoriz, deltaScale, CursorShift.LowerRight);
-            ResizeCursor(Cursors.NoMoveVert, deltaScale, CursorShift.LowerRight);
-            ResizeCursor(Cursors.PanEast, deltaScale, CursorShift.Centered);
-            ResizeCursor(Cursors.PanNE, deltaScale, CursorShift.Centered);
-            ResizeCursor(Cursors.PanNorth, deltaScale, CursorShift.Centered);
-            ResizeCursor(Cursors.PanNW, deltaScale, CursorShift.Centered);
-            ResizeCursor(Cursors.PanSE, deltaScale, CursorShift.Centered);
-            ResizeCursor(Cursors.PanSouth, deltaScale, CursorShift.Centered);
-            ResizeCursor(Cursors.PanSW, deltaScale, CursorShift.Centered);
-            ResizeCursor(Cursors.PanWest, deltaScale, CursorShift.Centered);
-            ResizeCursor(Cursors.SizeAll, deltaScale, CursorShift.Centered);
-            ResizeCursor(Cursors.SizeNESW, deltaScale, CursorShift.Centered);
-            ResizeCursor(Cursors.SizeNS, deltaScale, CursorShift.Centered);
-            ResizeCursor(Cursors.SizeNWSE, deltaScale, CursorShift.Centered);
-            ResizeCursor(Cursors.SizeWE, deltaScale, CursorShift.Centered);
-            ResizeCursor(Cursors.UpArrow, deltaScale, CursorShift.Centered);
-            ResizeCursor(Cursors.VSplit, deltaScale, CursorShift.Centered);
-            ResizeCursor(Cursors.WaitCursor, deltaScale, CursorShift.LowerRight);
-        }
-        
-        private void ResizeCursor(Cursor cursor, float deltaScale, CursorShift cursorShift)
-        {
-            var cursorImage = GetSystemCursorBitmap(cursor);
-            
-            var rescaledCursor = ReScaleBitmap(cursorImage, deltaScale);
-
-            //var rotatedCursor = RotateCursorBitmap(cursorImage, 
-                //GetAngleByPoints(_lastClickPoint.X, _lastClickPoint.Y)) as Bitmap;
-            
-            SetCursor(rescaledCursor, GetResourceId(cursor));
-        }
-        
-        private static Bitmap ReScaleBitmap(Image bitmap, float deltaScale)
-        {
-            var destImage = new Bitmap(bitmap.Width, bitmap.Height);
-            
-            var gfx = Graphics.FromImage(destImage);
-            
-            gfx.ScaleTransform(deltaScale, deltaScale);
-
-            gfx.CompositingMode = CompositingMode.SourceCopy;
-            gfx.CompositingQuality = CompositingQuality.HighQuality;
-            gfx.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            gfx.SmoothingMode = SmoothingMode.HighQuality;
-            gfx.PixelOffsetMode = PixelOffsetMode.HighQuality;
-            
-            gfx.DrawImage(bitmap, 0, 0, bitmap.Width, bitmap.Height);
-
-            return destImage;
-        }
-
-        private static float GetAngleByPoints(float x, float y)
-        {
-            return 45;
-        }
-        
-        private float Lerp(float firstFloat, float secondFloat, float by)
-        {
-            return firstFloat * (1 - by) + secondFloat * by;
-        }
-
-        private static Bitmap GetSystemCursorBitmap(Cursor cursor)
-        {
-            var bitmap = new Bitmap(
-                cursor.Size.Width, cursor.Size.Height);
-
-            var graphics = Graphics.FromImage(bitmap);
-
-            cursor.Draw(graphics,
-                new Rectangle(new Point(0, 0), cursor.Size));
-
-            return bitmap;
-        }
-
-        private static Image RotateCursorBitmap(Image bitmap, float angle)
-        {
-            var returnBitmap = new Bitmap(bitmap.Height, bitmap.Width);
-
-            var gfx = Graphics.FromImage(returnBitmap);
-
-            gfx.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            
-            gfx.TranslateTransform((float)bitmap.Width / 2, (float)bitmap.Height / 2);
-            gfx.RotateTransform(angle);
-            
-            gfx.TranslateTransform(-(float)bitmap.Height / 2, -(float)bitmap.Width / 2);
-            gfx.DrawImage(bitmap, 0, 0, bitmap.Width, bitmap.Height);
-
-            return returnBitmap;
-        }
-
-        private static uint GetResourceId(Cursor cursor)
-        {
-            var fi = typeof(Cursor).GetField(
-                "resourceId", BindingFlags.NonPublic | BindingFlags.Instance);
-
-            if (fi == null) return 0;
-            
-            var obj = fi.GetValue(cursor);
-            return Convert.ToUInt32((int) obj);
-
-        }
-
-        private static void SetCursor(Bitmap bitmap, uint whichCursor)
-        {
-            var ptr = bitmap.GetHicon();
-            SetSystemCursor(ptr, whichCursor);
-            DestroyIcon(ptr);
-            bitmap.Dispose();
         }
     }
 }
