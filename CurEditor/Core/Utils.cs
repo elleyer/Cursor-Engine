@@ -1,38 +1,29 @@
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Reflection;
+using System.Windows.Forms;
 
 namespace CurEditor.Core
 {
     public class Utils
     {
-        private static float _value;
-        
-        public static Bitmap ReScaleBitmap(EasingType easingType, Image bitmap, float scaleFactor)
+        public static Bitmap ReScaleBitmap(EasingType easingType, Image bitmap, double scaleFactor)
         {
-            var destRect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
-            var destImage = new Bitmap(bitmap.Width, bitmap.Height);
+            var image = new Bitmap(bitmap.Width * 2, bitmap.Height * 2, PixelFormat.Format32bppArgb);
 
-            destImage.SetResolution(bitmap.HorizontalResolution, bitmap.VerticalResolution);
+            var graphics = Graphics.FromImage(image);
 
-            using (var graphics = Graphics.FromImage(destImage))
-            {
-                graphics.CompositingMode = CompositingMode.SourceCopy;
-                graphics.CompositingQuality = CompositingQuality.HighQuality;
-                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                graphics.SmoothingMode = SmoothingMode.HighQuality;
-                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+            var size = new Size((int) (bitmap.Width * scaleFactor),
+                (int) (bitmap.Height * scaleFactor));
 
-                using (var wrapMode = new ImageAttributes())
-                {
-                    graphics.DrawImage(destImage, destRect, 0, 0, bitmap.Width, bitmap.Height, 
-                        GraphicsUnit.Pixel, wrapMode);
-                }
-            }
-
-            return destImage;
+            graphics.DrawImage(bitmap, new Rectangle(new Point((int) (32f / scaleFactor),
+                    (int) (32f/ scaleFactor)), 
+                size));
+            
+            return image;
         }
 
         public static Bitmap GetSystemCursorBitmap(System.Windows.Forms.Cursor cursor)
