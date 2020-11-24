@@ -55,11 +55,11 @@
             this.UseScalingInterpolation = new System.Windows.Forms.CheckBox();
             this.UseScaling = new System.Windows.Forms.CheckBox();
             this.CursorTreeView = new System.Windows.Forms.TreeView();
-            ((System.ComponentModel.ISupportInitialize) (this.MinScaleSlider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.InterpolationSlider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MinScaleSlider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.InterpolationSlider)).BeginInit();
             this.InterpolationIn.SuspendLayout();
             this.InterpolationOut.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.RotationSlider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RotationSlider)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,7 +84,7 @@
             // 
             // MinScaleSlider
             // 
-            this.MinScaleSlider.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.MinScaleSlider.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.MinScaleSlider.LargeChange = 1;
             this.MinScaleSlider.Location = new System.Drawing.Point(376, 32);
             this.MinScaleSlider.Minimum = 5;
@@ -95,9 +95,9 @@
             // 
             // label2
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(627, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(161, 20);
@@ -106,21 +106,22 @@
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.label1.Location = new System.Drawing.Point(642, 63);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(656, 60);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(146, 20);
+            this.label1.Size = new System.Drawing.Size(132, 20);
             this.label1.TabIndex = 6;
-            this.label1.Text = "Interpolation speed";
+            this.label1.Text = "Interpolation time";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // InterpolationSlider
             // 
-            this.InterpolationSlider.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.InterpolationSlider.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.InterpolationSlider.LargeChange = 1;
             this.InterpolationSlider.Location = new System.Drawing.Point(376, 83);
+            this.InterpolationSlider.Maximum = 20;
             this.InterpolationSlider.Minimum = 1;
             this.InterpolationSlider.Name = "InterpolationSlider";
             this.InterpolationSlider.Size = new System.Drawing.Size(412, 45);
@@ -129,7 +130,7 @@
             // 
             // SaveAllButton
             // 
-            this.SaveAllButton.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.SaveAllButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.SaveAllButton.Location = new System.Drawing.Point(713, 415);
             this.SaveAllButton.Name = "SaveAllButton";
             this.SaveAllButton.Size = new System.Drawing.Size(75, 23);
@@ -140,7 +141,7 @@
             // 
             // InterpolationIn
             // 
-            this.InterpolationIn.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.InterpolationIn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.InterpolationIn.Controls.Add(this.radioButton5);
             this.InterpolationIn.Controls.Add(this.radioButton4);
             this.InterpolationIn.Controls.Add(this.radioButton3);
@@ -210,7 +211,7 @@
             // 
             // InterpolationOut
             // 
-            this.InterpolationOut.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.InterpolationOut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.InterpolationOut.Controls.Add(this.radioButton6);
             this.InterpolationOut.Controls.Add(this.radioButton7);
             this.InterpolationOut.Controls.Add(this.radioButton8);
@@ -280,9 +281,9 @@
             // 
             // label3
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.label3.Location = new System.Drawing.Point(546, 113);
             this.label3.Name = "label3";
@@ -293,7 +294,7 @@
             // 
             // RotationSlider
             // 
-            this.RotationSlider.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.RotationSlider.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.RotationSlider.LargeChange = 1;
             this.RotationSlider.Location = new System.Drawing.Point(376, 134);
             this.RotationSlider.Maximum = 8;
@@ -373,17 +374,19 @@
             this.Controls.Add(this.SelectFolderButton);
             this.Name = "Form1";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize) (this.MinScaleSlider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.InterpolationSlider)).EndInit();
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnFormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.MinScaleSlider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.InterpolationSlider)).EndInit();
             this.InterpolationIn.ResumeLayout(false);
             this.InterpolationIn.PerformLayout();
             this.InterpolationOut.ResumeLayout(false);
             this.InterpolationOut.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.RotationSlider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RotationSlider)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         private System.Windows.Forms.TreeView CursorTreeView;
