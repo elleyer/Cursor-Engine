@@ -52,23 +52,6 @@ namespace CurEditor
             _cursorHandler = new CursorHandler(settings);
         }
 
-        private void ResizeDown()
-        {
-            //Easing.Run();
-        }
-
-        private void ResizeUp()
-        {
-            //SetSystemCursorsSize(32);
-            
-            
-            /*for (var i = 16; i < _startSize.Height; i+=2)
-            {
-                SetSystemCursorsSize(i);
-                Thread.Sleep(1000 / 500);
-            }*/
-        }
-
         private void SaveAllOnClick(object sender, EventArgs e)
         {
             var inButtons = InterpolationIn.Controls.OfType<RadioButton>().ToArray();
@@ -86,7 +69,7 @@ namespace CurEditor
             if (_cursorHandler == null)
                 _cursorHandler = new CursorHandler(settings);
             else
-                _cursorHandler.UpdateSettings(SettingsContainer.Get());
+                _cursorHandler.UpdateSettings(settings);
         }
 
         private void SelectFolderOnClick(object sender, EventArgs e)
@@ -113,6 +96,11 @@ namespace CurEditor
                     }
                 }
             }
+        }
+
+        private void OnFormClosing(object sender, FormClosingEventArgs e)
+        {
+            //_cursorHandler.SetDefault();
         }
     }
 }
