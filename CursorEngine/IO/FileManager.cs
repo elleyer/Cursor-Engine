@@ -14,7 +14,7 @@ namespace CursorEngine.IO
             var contList = new List<CursorContainer>();
             
             var directories = Directory.GetDirectories(path);
-            var countOfD = Directory.GetDirectories(path).Length;
+            var countOfD = directories.Length;
 
             for (var i = 0; i < countOfD; i++)
             {
@@ -38,7 +38,6 @@ namespace CursorEngine.IO
 
         public Cursor GetCursor(string path)
         {
-
             return new Cursor("123");
         }
 

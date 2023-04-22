@@ -7,7 +7,7 @@ namespace CursorEngine.Core.Trails
     {
         public List<TrailSegment> GetDrawables() => _trailParticles;
 
-        private int _currentParticleId;
+        private int _totalDrawn;
 
         public bool Enabled { get; set; }
 
@@ -40,7 +40,6 @@ namespace CursorEngine.Core.Trails
         public TrailSystem()
         {
             _trailParticles = new List<TrailSegment>();
-            //sourceBitmap = BitmapFromColor(5, Color.Coral);
         }
 
         private List<TrailSegment> _trailParticles;
@@ -72,22 +71,7 @@ namespace CursorEngine.Core.Trails
             var particle = new TrailSegment(screenPos, 125);
 
             _trailParticles.Add(particle);
-            _currentParticleId++;
-        }
-
-        private Bitmap BitmapFromColor(int size, Color color)
-        {
-            var bitmap = new Bitmap(size, size, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-
-            for (var x = 0; x < size; x++)
-            {
-                for (var y = 0; y < size; y++)
-                {
-                    bitmap.SetPixel(x, y, color);
-                }
-            }
-
-            return bitmap;
+            _totalDrawn++;
         }
 
         private void UpdateParticles(List<TrailSegment> particles, double deltaTime)
@@ -97,17 +81,9 @@ namespace CursorEngine.Core.Trails
                 particles[i].Lifetime -= deltaTime;
                 if (!(particles[i].Lifetime < 0))
                     continue;
-
-                //DisposeParticle(particles[i]);
+                
                 particles.RemoveAt(i);
             }
-        }
-
-        //blending.
-        private void DisposeParticle(TrailSegment p)
-        {
-            //WindowsApi.DeleteObject(p.ResourcePointer);
-            //todo: Dispose code;
         }
     }
 }

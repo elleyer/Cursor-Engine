@@ -52,15 +52,15 @@
   <ItemGroup>
     <Compile Include="Core\Cursor\CursorContainer.cs" />
     <Compile Include="Core\Cursor\CursorHandler.cs" />
-    <Compile Include="Core\DebugExtensions.cs" />
-    <Compile Include="Core\EasingType.cs" />
+    <Compile Include="Core\Debugging\DebugExtensions.cs" />
     <Compile Include="Core\Engine.cs" />
-    <Compile Include="Core\ETrailType.cs" />
-    <Compile Include="Core\IDrawable.cs" />
-    <Compile Include="Core\IDrawableProvider.cs" />
+    <Compile Include="Core\Enums\EasingType.cs" />
+    <Compile Include="Core\Enums\ETrailType.cs" />
     <Compile Include="Core\IUpdatable.cs" />
     <Compile Include="Core\MultimediaTimer.cs" />
     <Compile Include="Core\Rendering\CursorRenderer.cs" />
+    <Compile Include="Core\Rendering\IDrawable.cs" />
+    <Compile Include="Core\Rendering\IDrawableProvider.cs" />
     <Compile Include="Core\Rendering\IRenderer.cs" />
     <Compile Include="Core\Rendering\Renderer.cs" />
     <Compile Include="Core\Rendering\TrailRenderer.cs" />

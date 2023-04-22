@@ -9,7 +9,6 @@ namespace CursorEngine.Core.Trails
         {
             InitialLifetime = lifetime;
             Lifetime = lifetime;
-            //ResourcePointer = ptr;
             Position = pos;
         }
         
@@ -17,7 +16,5 @@ namespace CursorEngine.Core.Trails
         
         public double InitialLifetime { get; private set; }
         public double Lifetime { get; set; }
-
-        //public IntPtr ResourcePointer;
     }
 }
