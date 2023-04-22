@@ -1,4 +1,4 @@
-namespace CursorEngine.Core
+namespace CursorEngine.Core.Rendering
 {
     public class CursorRenderer
     {

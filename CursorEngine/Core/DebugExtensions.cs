@@ -14,8 +14,11 @@ namespace CursorEngine.Core
         public static void CreateDebugConsole()
         {
             AllocConsole();
-            WriteMessage($@"Debug session has been started. " + 
-                              $@"Full log available at '{AppContext.BaseDirectory}log.txt'");
+        }
+
+        public static void SetTitle(string msg)
+        {
+            Console.Title = msg;
         }
         
         public static void PushError(string message)
@@ -37,7 +40,7 @@ namespace CursorEngine.Core
 
         private static void WriteMessage(string message)
         {
-            Console.WriteLine($@"[{DateTime.Now}] > {message}");
+            Console.WriteLine($@"[{DateTime.Now}]> {message}");
             Console.ResetColor();
         }
     }

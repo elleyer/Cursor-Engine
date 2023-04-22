@@ -1,7 +1,6 @@
 namespace CursorEngine.Core
 {
-    public class IDrawable
+    public interface IDrawable
     {
-        
     }
 }

@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{E9F89F8F-2B6B-4B1B-BBBF-14FECD710F99}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>CursorEditor</RootNamespace>
+    <RootNamespace>CursorEngine</RootNamespace>
     <AssemblyName>CursorEngine</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -55,7 +55,19 @@
     <Compile Include="Core\DebugExtensions.cs" />
     <Compile Include="Core\EasingType.cs" />
     <Compile Include="Core\Engine.cs" />
+    <Compile Include="Core\ETrailType.cs" />
+    <Compile Include="Core\IDrawable.cs" />
+    <Compile Include="Core\IDrawableProvider.cs" />
+    <Compile Include="Core\IUpdatable.cs" />
+    <Compile Include="Core\MultimediaTimer.cs" />
+    <Compile Include="Core\Rendering\CursorRenderer.cs" />
+    <Compile Include="Core\Rendering\IRenderer.cs" />
+    <Compile Include="Core\Rendering\Renderer.cs" />
+    <Compile Include="Core\Rendering\TrailRenderer.cs" />
+    <Compile Include="Core\Trails\TrailSegment.cs" />
+    <Compile Include="Core\Trails\TrailSystem.cs" />
     <Compile Include="Core\Utils.cs" />
+    <Compile Include="Core\WindowsApi.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

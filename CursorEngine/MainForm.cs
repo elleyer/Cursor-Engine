@@ -16,7 +16,6 @@ namespace CursorEngine
             InitializeComponent();
             
             //For debug proposes.
-            DebugExtensions.CreateDebugConsole();
 
             if (!SettingsContainer.SaveExists) return;
             
@@ -40,7 +39,7 @@ namespace CursorEngine
             var outButtons = InterpolationOut.Controls.OfType<RadioButton>().ToArray();
             outButtons[(int)settings.EasingOut].Checked = true;
             
-            _cursorHandler = new CursorHandler(settings);
+            //_cursorHandler = new CursorHandler(settings);
         }
 
         private void SaveAllOnClick(object sender, EventArgs e)
@@ -58,10 +57,10 @@ namespace CursorEngine
 
             var settings = SettingsContainer.Get();
             
-            if (_cursorHandler == null)
+            /*if (_cursorHandler == null)
                 _cursorHandler = new CursorHandler(settings);
             else
-                _cursorHandler.UpdateSettings(settings);
+                _cursorHandler.UpdateSettings(settings);*/
         }
 
         private void SelectFolderOnClick(object sender, EventArgs e)

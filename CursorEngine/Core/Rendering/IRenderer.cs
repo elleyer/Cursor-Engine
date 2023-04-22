@@ -1,7 +1,9 @@
-namespace CursorEngine.Core
+using System;
+
+namespace CursorEngine.Core.Rendering
 {
     public interface IRenderer
     {
-        void Render();
+        void Render(IntPtr hdc, IntPtr memDc);
     }
 }

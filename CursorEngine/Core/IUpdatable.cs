@@ -1,7 +1,7 @@
 namespace CursorEngine.Core
 {
-    public class IUpdatable
+    public interface IUpdatable
     {
-        
+        void Update(double deltaTime);
     }
 }

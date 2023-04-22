@@ -12,17 +12,6 @@ namespace CursorEngine.Core.Cursor
 {
     public class CursorHandler : IDisposable
     {
-        [DllImport("user32.dll")]
-        private static extern bool SetCursorPos(int x, int y);
-        
-        [DllImport("user32.dll")]
-        private static extern bool SetSystemCursor(IntPtr hcur, uint id);
-
-        [DllImport("user32.dll")]
-        private static extern bool DestroyIcon(IntPtr hIcon);
-
-        private const double FRAMETIME = 1000/60d;
-        
         private const int MAXSCALE = 1;
         
         private readonly IKeyboardMouseEvents _globalHook;
@@ -41,7 +30,7 @@ namespace CursorEngine.Core.Cursor
 
         private int _lastPrerendered = 0;
 
-        public CursorHandler(Settings settings)
+        /*public CursorHandler(Settings settings)
         {
             _globalHook = Hook.GlobalEvents();
             
@@ -159,11 +148,11 @@ namespace CursorEngine.Core.Cursor
             curr = Utils.GetCursorResourceId(Cursors.Arrow);
             SetSystemCursor(hicon, curr);
             DestroyIcon(hicon);
-        }
+        }*/
 
         public void Dispose()
         {
-            Unsubscribe();
+            //Unsubscribe();
         }
     }
 }
